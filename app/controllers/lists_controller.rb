@@ -2,12 +2,7 @@ class ListsController < ApplicationController
   before_action :set_list, only: [:show, :destroy]
 
   def index
-    if params[:query].present?
-      @query = params[:query]
-      @lists = List.where("name ILIKE ?","%#{params[:query]}%")
-    else
-      @lists = List.all
-    end
+    @lists = List.all
   end
 
   def show
@@ -30,7 +25,7 @@ class ListsController < ApplicationController
 
   def destroy
     @list.destroy
-    redirect_to lists_path
+    redirect_to root_path
   end
 
   private
